@@ -1,26 +1,47 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { CustomCursor } from "@/components/CustomCursor";
+import { LoadingScreen } from "@/components/LoadingScreen";
+import { Navbar } from "@/components/Navbar";
+import { Hero } from "@/components/Hero";
+import { About } from "@/components/About";
+import { Services } from "@/components/Services";
+import { Works } from "@/components/Works";
+import { Testimonials } from "@/components/Testimonials";
+import { Contact } from "@/components/Contact";
+import { Footer } from "@/components/Footer";
 
 export const Route = createFileRoute("/")({
+  head: () => ({
+    meta: [
+      { title: "Show Focus — Luxury Event Experiences" },
+      {
+        name: "description",
+        content:
+          "Show Focus is a luxury event atelier crafting cinematic weddings, brand spectacles, gala nights and immersive exhibitions worldwide.",
+      },
+      { property: "og:title", content: "Show Focus — Luxury Event Experiences" },
+      {
+        property: "og:description",
+        content: "We don't organize events. We create experiences.",
+      },
+    ],
+  }),
   component: Index,
 });
 
-// IMPORTANT: Replace this placeholder. For sites with multiple pages (About, Services, Contact, etc.),
-// create separate route files (about.tsx, services.tsx, contact.tsx) — don't put all pages in this file.
-function PlaceholderIndex() {
-  return (
-    <div
-      className="flex min-h-screen items-center justify-center"
-      style={{ backgroundColor: "#fcfbf8" }}
-    >
-      <img
-        data-lovable-blank-page-placeholder="REMOVE_THIS"
-        src="https://cdn.gpteng.co/blank-app-v1.svg"
-        alt="Your app will live here!"
-      />
-    </div>
-  );
-}
-
 function Index() {
-  return <PlaceholderIndex />;
+  return (
+    <main className="relative bg-[#050505] text-white">
+      <LoadingScreen />
+      <CustomCursor />
+      <Navbar />
+      <Hero />
+      <About />
+      <Services />
+      <Works />
+      <Testimonials />
+      <Contact />
+      <Footer />
+    </main>
+  );
 }
