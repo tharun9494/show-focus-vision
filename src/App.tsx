@@ -1,4 +1,3 @@
-import { createFileRoute } from "@tanstack/react-router";
 import { CustomCursor } from "@/components/CustomCursor";
 import { LoadingScreen } from "@/components/LoadingScreen";
 import { Navbar } from "@/components/Navbar";
@@ -14,26 +13,7 @@ import { MiracleMarquee } from "@/components/MiracleMarquee";
 import { CircularBadge } from "@/components/CircularBadge";
 import { Footer } from "@/components/Footer";
 
-export const Route = createFileRoute("/")({
-  head: () => ({
-    meta: [
-      { title: "Show Focus — Luxury Event Experiences" },
-      {
-        name: "description",
-        content:
-          "Show Focus is a luxury event atelier crafting cinematic weddings, brand spectacles, gala nights and immersive exhibitions worldwide.",
-      },
-      { property: "og:title", content: "Show Focus — Luxury Event Experiences" },
-      {
-        property: "og:description",
-        content: "We don't organize events. We create experiences.",
-      },
-    ],
-  }),
-  component: Index,
-});
-
-function Index() {
+export default function App() {
   return (
     <main className="relative bg-[#050505] text-white">
       <div className="bg-noise fixed inset-0 z-50 pointer-events-none" />
