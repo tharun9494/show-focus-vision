@@ -77,15 +77,28 @@ export function Gallery() {
       </div>
 
       {/* Mobile Carousel */}
-      <div className="md:hidden flex snap-x snap-mandatory overflow-x-auto pb-8 px-6 gap-4 hide-scrollbar relative z-20">
+      <motion.div 
+        initial={{ opacity: 0, y: 40 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.8 }}
+        className="md:hidden flex snap-x snap-mandatory overflow-x-auto pb-8 px-6 gap-4 hide-scrollbar relative z-20"
+      >
         {images.map((img, i) => (
-          <div key={i} className="w-[85vw] shrink-0 snap-center">
+          <motion.div 
+            key={i} 
+            initial={{ opacity: 0, scale: 0.95 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true, amount: 0.3 }}
+            transition={{ duration: 0.6 }}
+            className="w-[85vw] shrink-0 snap-center"
+          >
             <div className="group relative overflow-hidden rounded-2xl glass-strong shadow-2xl">
-              <img src={img} className="h-[400px] w-full object-cover filter grayscale" alt={`Gallery item ${i}`} />
+              <img src={img} className="h-[400px] w-full object-cover filter grayscale transition-transform duration-1000 group-hover:scale-110" alt={`Gallery item ${i}`} />
             </div>
-          </div>
+          </motion.div>
         ))}
-      </div>
+      </motion.div>
 
       <div className="absolute inset-0 pointer-events-none bg-gradient-to-t from-[#050505] via-transparent to-[#050505] z-10" />
     </section>

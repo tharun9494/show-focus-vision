@@ -95,25 +95,39 @@ export function Works() {
       </div>
 
       {/* Mobile Carousel View */}
-      <div className="md:hidden flex snap-x snap-mandatory overflow-x-auto pb-8 px-6 gap-6 hide-scrollbar">
+      <motion.div 
+        initial={{ opacity: 0, y: 40 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.8 }}
+        className="md:hidden flex snap-x snap-mandatory overflow-x-auto pb-8 px-6 gap-6 hide-scrollbar"
+      >
         {works.map((w, i) => (
-          <div
+          <motion.div
             key={w.title}
+            initial={{ opacity: 0, scale: 0.9 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true, amount: 0.3 }}
+            transition={{ duration: 0.6 }}
             className="group relative h-[60vh] w-[85vw] shrink-0 snap-center overflow-hidden rounded-3xl glass-strong"
           >
             {/* Background Image Container */}
             <div className="absolute inset-0 w-full h-full overflow-hidden">
               <div 
-                className="absolute inset-0 w-full h-full bg-cover bg-center opacity-70 filter grayscale"
+                className="absolute inset-0 w-full h-full bg-cover bg-center opacity-70 filter grayscale transition-transform duration-1000 group-hover:scale-110"
                 style={{ backgroundImage: `url(${w.img})` }}
               />
               <div className="absolute inset-0 bg-gradient-to-t from-[#050505] via-[#050505]/60 to-transparent" />
             </div>
 
             {/* Floating number */}
-            <div className="absolute top-6 right-6 font-display text-7xl text-white/20">
+            <motion.div 
+              animate={{ y: [0, -10, 0] }}
+              transition={{ duration: 4, repeat: Infinity, ease: "easeInOut", delay: i * 0.2 }}
+              className="absolute top-6 right-6 font-display text-7xl text-white/20"
+            >
               {String(i + 1).padStart(2, "0")}
-            </div>
+            </motion.div>
 
             <div className="absolute right-0 bottom-0 left-0 p-8">
               <div className="mb-3 inline-flex items-center gap-2 rounded-full border border-white/20 bg-black/30 px-3 py-1 text-[10px] tracking-[0.3em] text-white/80 uppercase backdrop-blur">
@@ -123,9 +137,9 @@ export function Works() {
               <h3 className="font-display text-3xl font-light text-white">{w.title}</h3>
               <p className="mt-2 text-xs tracking-[0.2em] text-white/70 uppercase">{w.cat}</p>
             </div>
-          </div>
+          </motion.div>
         ))}
-      </div>
+      </motion.div>
     </section>
   );
 }
