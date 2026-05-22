@@ -107,9 +107,11 @@ export function Services() {
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
+        <div className="flex snap-x snap-mandatory overflow-x-auto pb-8 -mx-6 px-6 md:mx-0 md:px-0 md:grid md:grid-cols-2 gap-6 md:overflow-visible hide-scrollbar">
           {services.map((s, i) => (
-            <ServiceCard key={s.title} s={s} i={i} />
+            <div key={s.title} className="w-[85vw] shrink-0 snap-center md:w-auto md:shrink">
+              <ServiceCard s={s} i={i} />
+            </div>
           ))}
         </div>
       </div>

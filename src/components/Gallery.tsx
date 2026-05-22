@@ -43,8 +43,8 @@ export function Gallery() {
         </motion.div>
       </div>
 
-      {/* Masonry-like Parallax Gallery */}
-      <div className="mx-auto flex max-w-[1400px] justify-center gap-4 px-6 md:gap-8 md:px-10">
+      {/* Desktop Masonry */}
+      <div className="hidden md:flex mx-auto max-w-[1400px] justify-center gap-4 px-6 md:gap-8 md:px-10">
         {/* Column 1 */}
         <motion.div style={{ y: y1 }} className="flex flex-col gap-4 md:gap-8 pt-20">
           <div className="group relative overflow-hidden rounded-2xl glass-strong">
@@ -65,7 +65,7 @@ export function Gallery() {
           </div>
         </motion.div>
 
-        {/* Column 3 (Hidden on mobile) */}
+        {/* Column 3 */}
         <motion.div style={{ y: y3 }} className="hidden flex-col gap-8 md:flex pt-40">
           <div className="group relative overflow-hidden rounded-2xl glass-strong">
             <img src={images[4]} className="h-[350px] w-full object-cover transition-transform duration-1000 group-hover:scale-110 filter grayscale hover:grayscale-0" alt="Gallery" />
@@ -74,6 +74,17 @@ export function Gallery() {
             <img src={images[5]} className="h-[450px] w-full object-cover transition-transform duration-1000 group-hover:scale-110 filter grayscale hover:grayscale-0" alt="Gallery" />
           </div>
         </motion.div>
+      </div>
+
+      {/* Mobile Carousel */}
+      <div className="md:hidden flex snap-x snap-mandatory overflow-x-auto pb-8 px-6 gap-4 hide-scrollbar relative z-20">
+        {images.map((img, i) => (
+          <div key={i} className="w-[85vw] shrink-0 snap-center">
+            <div className="group relative overflow-hidden rounded-2xl glass-strong shadow-2xl">
+              <img src={img} className="h-[400px] w-full object-cover filter grayscale" alt={`Gallery item ${i}`} />
+            </div>
+          </div>
+        ))}
       </div>
 
       <div className="absolute inset-0 pointer-events-none bg-gradient-to-t from-[#050505] via-transparent to-[#050505] z-10" />
