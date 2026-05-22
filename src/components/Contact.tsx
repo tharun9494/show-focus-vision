@@ -1,12 +1,12 @@
 import { motion } from "framer-motion";
 
 const branches = [
-  { city: "Mumbai", x: "52%", y: "55%", delay: 0 },
-  { city: "Delhi", x: "47%", y: "38%", delay: 0.4 },
-  { city: "Bengaluru", x: "50%", y: "70%", delay: 0.8 },
-  { city: "Hyderabad", x: "53%", y: "62%", delay: 1.2 },
-  { city: "Goa", x: "45%", y: "63%", delay: 1.6 },
-  { city: "Udaipur", x: "44%", y: "47%", delay: 2.0 },
+  { city: "Delhi", x: "45%", y: "28%", delay: 0 },
+  { city: "Udaipur", x: "32%", y: "42%", delay: 0.4 },
+  { city: "Mumbai", x: "28%", y: "58%", delay: 0.8 },
+  { city: "Goa", x: "30%", y: "68%", delay: 1.2 },
+  { city: "Hyderabad", x: "48%", y: "62%", delay: 1.6 },
+  { city: "Bengaluru", x: "45%", y: "78%", delay: 2.0 },
 ];
 
 export function Contact() {
@@ -40,22 +40,26 @@ export function Contact() {
             transition={{ duration: 1.2 }}
             className="relative aspect-[4/5] overflow-hidden rounded-3xl glass-strong p-6"
           >
-            <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_55%,rgba(212,175,55,0.15),transparent_60%)]" />
+            <motion.div 
+              animate={{ y: [0, -10, 0], scale: [1, 1.02, 1] }}
+              transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
+              className="absolute inset-0 bg-[radial-gradient(circle_at_50%_55%,rgba(212,175,55,0.15),transparent_60%)]" 
+            />
             <div className="relative h-full w-full">
               {/* Stylized India outline */}
               <svg viewBox="0 0 100 100" className="absolute inset-0 h-full w-full" preserveAspectRatio="xMidYMid meet">
                 <defs>
                   <linearGradient id="goldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-                    <stop offset="0%" stopColor="#D4AF37" stopOpacity="0.8" />
-                    <stop offset="100%" stopColor="#FFD700" stopOpacity="0.3" />
+                    <stop offset="0%" stopColor="#D4AF37" stopOpacity="0.6" />
+                    <stop offset="100%" stopColor="#FFD700" stopOpacity="0.2" />
                   </linearGradient>
                 </defs>
                 <path
-                  d="M45,25 Q42,30 44,35 L40,38 Q38,42 42,46 L38,50 Q36,55 40,58 L42,62 Q40,68 44,72 L48,78 Q52,80 54,76 L58,72 Q60,68 58,64 L60,58 Q62,52 58,48 L60,42 Q58,38 54,36 L56,30 Q52,26 48,26 Z"
+                  d="M48,5 C45,10 38,15 32,20 C28,25 22,35 18,40 C15,45 12,50 16,55 C20,60 22,58 26,62 C28,68 30,78 38,88 C42,95 46,98 50,98 C54,98 58,92 62,85 C68,75 72,68 76,60 C80,55 85,52 90,50 C95,48 92,40 85,38 C80,35 75,32 70,28 C65,24 60,18 55,12 C52,8 50,5 48,5 Z"
                   fill="url(#goldGrad)"
                   stroke="#D4AF37"
-                  strokeWidth="0.3"
-                  opacity="0.4"
+                  strokeWidth="0.5"
+                  opacity="0.5"
                 />
                 {/* Grid */}
                 {Array.from({ length: 10 }).map((_, i) => (
@@ -73,14 +77,14 @@ export function Contact() {
                   className="absolute -translate-x-1/2 -translate-y-1/2"
                   style={{ left: b.x, top: b.y }}
                 >
-                  <div className="relative">
+                  <div className="relative group cursor-pointer">
                     <motion.div
                       animate={{ scale: [1, 2.5, 1], opacity: [0.6, 0, 0.6] }}
                       transition={{ duration: 2.5, repeat: Infinity, delay: b.delay }}
-                      className="absolute inset-0 h-3 w-3 rounded-full bg-[#FFD700]"
+                      className="absolute inset-0 h-4 w-4 rounded-full bg-[#FFD700]"
                     />
-                    <div className="relative h-3 w-3 rounded-full bg-[#FFD700] glow-gold" />
-                    <div className="absolute top-4 left-1/2 -translate-x-1/2 whitespace-nowrap text-[10px] tracking-[0.2em] text-white/80 uppercase">
+                    <div className="relative h-4 w-4 rounded-full bg-[#FFD700] glow-gold transition-transform duration-300 group-hover:scale-125" />
+                    <div className="absolute top-6 left-1/2 -translate-x-1/2 whitespace-nowrap text-[11px] font-medium tracking-[0.2em] text-white opacity-90 uppercase drop-shadow-md">
                       {b.city}
                     </div>
                   </div>

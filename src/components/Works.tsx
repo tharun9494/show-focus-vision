@@ -1,19 +1,20 @@
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion, useScroll, useTransform, useSpring } from "framer-motion";
 import { useRef } from "react";
 
 const works = [
-  { title: "Aurora Gala", cat: "Corporate · Mumbai", year: "2024", hue: "from-amber-500/40 to-rose-500/30" },
-  { title: "House of Veer", cat: "Royal Wedding · Udaipur", year: "2024", hue: "from-yellow-400/40 to-orange-500/30" },
-  { title: "Nebula Launch", cat: "Brand Reveal · Dubai", year: "2023", hue: "from-yellow-300/40 to-amber-700/30" },
-  { title: "Sahara Nights", cat: "Destination · Morocco", year: "2023", hue: "from-orange-400/40 to-red-600/30" },
-  { title: "Pavilion 07", cat: "Exhibition · Berlin", year: "2023", hue: "from-amber-300/40 to-yellow-700/30" },
-  { title: "Maison Lumière", cat: "Gala · Paris", year: "2022", hue: "from-rose-300/40 to-amber-500/30" },
+  { title: "Aurora Gala", cat: "Corporate · Mumbai", year: "2024", img: "https://images.unsplash.com/photo-1511512578047-dfb367046420?auto=format&fit=crop&q=80&w=1200" },
+  { title: "House of Veer", cat: "Royal Wedding · Udaipur", year: "2024", img: "https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&q=80&w=1200" },
+  { title: "Nebula Launch", cat: "Brand Reveal · Dubai", year: "2023", img: "https://images.unsplash.com/photo-1492684223066-81342ee5ff30?auto=format&fit=crop&q=80&w=1200" },
+  { title: "Sahara Nights", cat: "Destination · Morocco", year: "2023", img: "https://images.unsplash.com/photo-1533174000223-95d10526e828?auto=format&fit=crop&q=80&w=1200" },
+  { title: "Pavilion 07", cat: "Exhibition · Berlin", year: "2023", img: "https://images.unsplash.com/photo-1470229722913-7c092fb1f1dc?auto=format&fit=crop&q=80&w=1200" },
+  { title: "Maison Lumière", cat: "Gala · Paris", year: "2022", img: "https://images.unsplash.com/photo-1464366400600-7168b8af9bc3?auto=format&fit=crop&q=80&w=1200" },
 ];
 
 export function Works() {
   const ref = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start end", "end start"] });
-  const x = useTransform(scrollYProgress, [0, 1], ["10%", "-60%"]);
+  const rawX = useTransform(scrollYProgress, [0, 1], ["10%", "-60%"]);
+  const x = useSpring(rawX, { stiffness: 100, damping: 30, restDelta: 0.001 });
 
   return (
     <section id="works" className="relative overflow-hidden bg-[#050505] py-32 md:py-48">
@@ -49,21 +50,31 @@ export function Works() {
                 data-cursor-hover
                 className="group relative h-[70vh] w-[80vw] max-w-[520px] shrink-0 overflow-hidden rounded-3xl glass-strong"
               >
-                <div className={`absolute inset-0 bg-gradient-to-br ${w.hue} opacity-80`} />
-                <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,rgba(255,215,0,0.25),transparent_60%)]" />
-                <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent" />
+                {/* Background Image Container */}
+                <div className="absolute inset-0 w-full h-full overflow-hidden">
+                  <div 
+                    className="absolute inset-0 w-full h-full bg-cover bg-center transition-transform duration-1000 group-hover:scale-110 opacity-70 filter grayscale group-hover:grayscale-0"
+                    style={{ backgroundImage: `url(${w.img})` }}
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#050505] via-[#050505]/60 to-transparent" />
+                  <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,rgba(212,175,55,0.25),transparent_60%)]" />
+                </div>
 
                 {/* Decorative grid */}
-                <div className="absolute inset-0 opacity-20" style={{
+                <div className="absolute inset-0 opacity-10" style={{
                   backgroundImage:
                     "linear-gradient(to right, rgba(255,255,255,0.1) 1px, transparent 1px), linear-gradient(to bottom, rgba(255,255,255,0.1) 1px, transparent 1px)",
                   backgroundSize: "60px 60px",
                 }} />
 
                 {/* Floating number */}
-                <div className="absolute top-8 right-8 font-display text-8xl text-white/20 transition-all duration-700 group-hover:text-[#FFD700]/60 group-hover:scale-110">
+                <motion.div 
+                  animate={{ y: [0, -15, 0] }}
+                  transition={{ duration: 4, repeat: Infinity, ease: "easeInOut", delay: i * 0.2 }}
+                  className="absolute top-8 right-8 font-display text-8xl text-white/20 transition-all duration-700 group-hover:text-[#FFD700]/60 group-hover:scale-110"
+                >
                   {String(i + 1).padStart(2, "0")}
-                </div>
+                </motion.div>
 
                 <div className="absolute right-0 bottom-0 left-0 p-8 md:p-10">
                   <div className="mb-3 inline-flex items-center gap-2 rounded-full border border-white/20 bg-black/30 px-3 py-1 text-[10px] tracking-[0.3em] text-white/80 uppercase backdrop-blur">

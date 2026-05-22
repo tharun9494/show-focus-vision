@@ -24,8 +24,7 @@ export function LoadingScreen() {
     <AnimatePresence>
       {!done && (
         <motion.div
-          exit={{ opacity: 0, scale: 1.05 }}
-          transition={{ duration: 0.8, ease: [0.76, 0, 0.24, 1] }}
+          exit={{ opacity: 0, y: "-100%", transition: { duration: 1.2, ease: [0.76, 0, 0.24, 1] } }}
           className="fixed inset-0 z-[9998] flex flex-col items-center justify-center bg-[#050505]"
         >
           <motion.div

@@ -57,23 +57,29 @@ export function Testimonials() {
               viewport={{ once: true, margin: "-50px" }}
               transition={{ duration: 0.8, delay: i * 0.1 }}
               data-cursor-hover
-              className="group relative overflow-hidden rounded-3xl glass p-10 transition-all duration-500 hover:border-gold hover:-translate-y-2"
+              className="group relative overflow-hidden rounded-3xl glass p-10 transition-all duration-500 hover:border-gold"
             >
-              <div className="absolute -top-6 -left-2 font-display text-[180px] leading-none text-[#D4AF37]/10 transition-colors duration-500 group-hover:text-[#D4AF37]/25">
-                "
-              </div>
-              <div className="relative z-10">
-                <p className="font-display text-2xl leading-snug text-white md:text-3xl">
-                  {t.quote}
-                </p>
-                <div className="mt-8 flex items-center gap-4 border-t border-white/10 pt-6">
-                  <div className="h-12 w-12 rounded-full bg-gradient-to-br from-[#D4AF37] to-[#7a6019] glow-gold" />
-                  <div>
-                    <div className="text-sm font-medium text-white">{t.name}</div>
-                    <div className="mt-0.5 text-xs tracking-[0.2em] text-[#A0A0A0] uppercase">{t.role}</div>
+              <motion.div 
+                animate={{ y: [0, -8, 0] }}
+                transition={{ duration: 6, repeat: Infinity, ease: "easeInOut", delay: i * 0.3 }}
+                className="h-full w-full"
+              >
+                <div className="absolute -top-6 -left-2 font-display text-[180px] leading-none text-[#D4AF37]/10 transition-colors duration-500 group-hover:text-[#D4AF37]/25">
+                  "
+                </div>
+                <div className="relative z-10">
+                  <p className="font-display text-2xl leading-snug text-white md:text-3xl">
+                    {t.quote}
+                  </p>
+                  <div className="mt-8 flex items-center gap-4 border-t border-white/10 pt-6">
+                    <div className="h-12 w-12 rounded-full bg-gradient-to-br from-[#D4AF37] to-[#7a6019] glow-gold" />
+                    <div>
+                      <div className="text-sm font-medium text-white">{t.name}</div>
+                      <div className="mt-0.5 text-xs tracking-[0.2em] text-[#A0A0A0] uppercase">{t.role}</div>
+                    </div>
                   </div>
                 </div>
-              </div>
+              </motion.div>
             </motion.div>
           ))}
         </div>
@@ -82,7 +88,7 @@ export function Testimonials() {
         <div className="relative mt-24 overflow-hidden">
           <div className="pointer-events-none absolute top-0 left-0 z-10 h-full w-32 bg-gradient-to-r from-[#050505] to-transparent" />
           <div className="pointer-events-none absolute top-0 right-0 z-10 h-full w-32 bg-gradient-to-l from-[#050505] to-transparent" />
-          <div className="flex animate-marquee gap-20 whitespace-nowrap">
+          <div className="flex animate-marquee gap-20 whitespace-nowrap hover:[animation-play-state:paused]">
             {[...logos, ...logos].map((l, i) => (
               <span
                 key={i}

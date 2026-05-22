@@ -2,7 +2,7 @@ import { Canvas, useFrame } from "@react-three/fiber";
 import { Float, Environment } from "@react-three/drei";
 import { useRef, useMemo, Suspense } from "react";
 import * as THREE from "three";
-import { motion } from "framer-motion";
+import { motion, useScroll, useTransform } from "framer-motion";
 
 function Particles({ count = 1200 }: { count?: number }) {
   const ref = useRef<THREE.Points>(null!);
@@ -128,6 +128,10 @@ function Scene() {
 }
 
 export function Hero() {
+  const { scrollY } = useScroll();
+  const yParallax = useTransform(scrollY, [0, 1000], [0, 300]);
+  const opacityParallax = useTransform(scrollY, [0, 500], [1, 0]);
+
   return (
     <section className="relative h-screen w-full overflow-hidden bg-luxury">
       {/* 3D scene */}
@@ -150,7 +154,10 @@ export function Hero() {
       </div>
 
       {/* Content */}
-      <div className="relative z-10 flex h-full flex-col items-center justify-center px-6 text-center">
+      <motion.div 
+        style={{ y: yParallax, opacity: opacityParallax }}
+        className="relative z-10 flex h-full flex-col items-center justify-center px-6 text-center"
+      >
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -212,7 +219,7 @@ export function Hero() {
             Begin a project →
           </a>
         </motion.div>
-      </div>
+      </motion.div>
 
       {/* Scroll cue */}
       <motion.div
